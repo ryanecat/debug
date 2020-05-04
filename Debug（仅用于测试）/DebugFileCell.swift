@@ -1,5 +1,5 @@
 //
-//  RNFileCell.swift
+//  DebugFileCell.swift
 //  Test
 //
 //  Created by Ryan on 2019/12/25.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RNFileCell: UITableViewCell {
+class DebugFileCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }

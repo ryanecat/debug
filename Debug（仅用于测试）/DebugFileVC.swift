@@ -1,5 +1,5 @@
 //
-//  RNFileVC.swift
+//  DebugFileVC.swift
 //  Test
 //
 //  Created by Ryan on 2019/12/31.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RNFileVC: UIViewController {
+class DebugFileVC: UIViewController {
     enum Menu: String {
         case edit  = "编辑"
         case selAll  = "全选"
@@ -40,7 +40,7 @@ class RNFileVC: UIViewController {
     }
 }
 
-extension RNFileVC {
+extension DebugFileVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareNavigation()
@@ -53,7 +53,7 @@ extension RNFileVC {
     }
 }
 
-extension RNFileVC {
+extension DebugFileVC {
     func prepareNavigation() {
         editItem = UIBarButtonItem(title: Menu.edit.rawValue, style: .plain, target: self, action: #selector(editItemClick))
         selAllItem = UIBarButtonItem(title: Menu.selAll.rawValue, style: .plain, target: self, action: #selector(selAllItemClick))
@@ -65,14 +65,14 @@ extension RNFileVC {
         tableView = UITableView(frame: .zero, style: .plain)
         tableView.allowsMultipleSelectionDuringEditing = true
         tableView.rowHeight = 64
-        tableView.register(RNFileCell.classForCoder(), forCellReuseIdentifier: "RNFileCell")
+        tableView.register(DebugFileCell.classForCoder(), forCellReuseIdentifier: "DebugFileCell")
         tableView.dataSource = self
         tableView.delegate = self
         view.addSubview(tableView)
     }
 }
 
-extension RNFileVC {
+extension DebugFileVC {
     @objc
     func editItemClick() {
         let isEditing = !tableView.isEditing
@@ -97,13 +97,13 @@ extension RNFileVC {
     }
 }
 
-extension RNFileVC: UITableViewDataSource, UITableViewDelegate {
+extension DebugFileVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return subURLs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: RNFileCell = tableView.dequeueReusableCell(withIdentifier: "RNFileCell") as! RNFileCell
+        let cell: DebugFileCell = tableView.dequeueReusableCell(withIdentifier: "DebugFileCell") as! DebugFileCell
         cell.setUrl(subURLs[indexPath.row])
         return cell
     }
@@ -119,7 +119,7 @@ extension RNFileVC: UITableViewDataSource, UITableViewDelegate {
             print("这不是文件夹, 所以没有下一级")
             return
         }
-        navigationController?.pushViewController(RNFileVC(selURL), animated: true)
+        navigationController?.pushViewController(DebugFileVC(selURL), animated: true)
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -139,7 +139,7 @@ extension RNFileVC: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension RNFileVC {
+extension DebugFileVC {
     private func mDeleteRow(_ indexPaths: [IndexPath]? = nil) -> Bool {
         if let selIndexPaths = indexPaths ?? tableView.indexPathsForSelectedRows {
             var selURLs: [URL] = []
