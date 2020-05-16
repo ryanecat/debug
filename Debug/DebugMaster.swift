@@ -15,18 +15,15 @@ class DebugMaster {
                 let nav = UINavigationController(rootViewController: DebugFileVC(kHomeURL))
                 UIViewController.current()?.present(nav, animated: true, completion: nil)
             })
-            
             view.addSubview(UIButton("验证收据(本地)", frame: .init(x: 15, y: 88+10+64, width: 160, height: 64)) {
-                let success = PurchaseManager.shared.verifyReceiptLocally(kUnlockProductID, type: .autoRenewableSubscription)
+                let success = PurchaseManager.shared.verifyReceiptLocally(kUnlockProductID, type: .nonConsumable)
                 RNToastUtil.showMsgAlert(success ? "成功!":"失败!")
             })
-            
-//            view.addSubview(UIButton("把收据文件复制出来", frame: .init(x: 15, y: 88+10+64+10+64, width: 160, height: 64)) {
-//                PurchaseManager.shared.verifyReceiptOnline(kMonthlyProductID) { (success) in
-//                    let msg = "联网验证\n\(kMonthlyProductID)\n" + (success ? "成功!":"失败!")
-//                    RNToastUtil.showMsgAlert(msg)
-//                }
-//            })
+            view.addSubview(UIButton("验证收据(联网)", frame: .init(x: 15, y: 88+10+64+10+64, width: 160, height: 64)) {
+                PurchaseManager.shared.verifyReceiptOnline(kUnlockProductID, sharedSecret: kSharedSecret) { (success) in
+                    RNToastUtil.showMsgAlert(success ? "成功!":"失败!")
+                }
+            })
             
         }
     }
