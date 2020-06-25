@@ -1,2 +1,3 @@
 # debug
-沙盒文件查看工具
+  
+    Drag the folder to your project, then you can use it by one line code. See the source file for detail.
